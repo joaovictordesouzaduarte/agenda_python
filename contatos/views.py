@@ -18,7 +18,6 @@ def index(request):
         'contatos': contatos
 })
 
-
 def ver_contato(request, contato_id):
     contato = get_object_or_404(Contato, id=contato_id)
     return render(request, 'contatos/ver_contato.html', {
