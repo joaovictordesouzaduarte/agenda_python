@@ -4,6 +4,9 @@ from django.core.validators import validate_email
 from django.contrib.auth.models import User
 
 def login(request): 
+    if request.method != 'POST':
+        return render(request, 'accounts/login.html')
+
     return render(request, 'accounts/login.html')
 
 def logout(request): 
