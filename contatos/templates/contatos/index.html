@@ -1,43 +1,87 @@
 {% extends 'base.html' %}
 {% block conteudo %} 
 
-    <h1 class="mt-5">Minha agenda</h1>
-
-    <table class="table">
-    <thead>
-        <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Sobrenome</th>
-        <th>Telefone</th>
-        <th>Categoria</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        {% for contato in contatos %}
-            {% if contato.mostrar %}
-            <td>{{ contato.id }}</td>
-            <td>
-                <a href="{% url 'ver_contato' contato.id %}"> {{contato.nome}}</a>
-            </td>
-            <td>{{contato.sobrenome}}</td>
-            <td>{{contato.telefone}}</td>
-            <td>{{contato.categoria}}</td>
+    {% if user.is_authenticated %}
+        <h1 class="mt-5">Minha agenda</h1>
+        <table class="table">
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Telefone</th>
+            <th>Categoria</th>
             </tr>
-            {% endif %}
-        {% endfor %}
-    </tbody>
-    </table>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            {% for pagina in contatos.paginator.page_range %}
-                {% if contatos.number == pagina %}
-                    <li class="page-item active"><a class="page-link" href="?p={{ pagina }}">{{pagina}}</a></li>
-                {% else %}
-                    <li class="page-item"><a class="page-link" href="?p={{ pagina }}">{{pagina}}</a></li>
+        </thead>
+        <tbody>
+            <tr>
+            {% for contato in contatos %}
+                {% if contato.mostrar %}
+                <td>{{ contato.id }}</td>
+                <td>
+                    <a href="{% url 'ver_contato' contato.id %}"> {{contato.nome}}</a>
+                </td>
+                <td>{{contato.sobrenome}}</td>
+                <td>{{contato.telefone}}</td>
+                <td>{{contato.categoria}}</td>
+                </tr>
                 {% endif %}
             {% endfor %}
-        </ul>
-    </nav>
+        </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% for pagina in contatos.paginator.page_range %}
+                    {% if contatos.number == pagina %}
+                        <li class="page-item active"><a class="page-link" href="?p={{ pagina }}">{{pagina}}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?p={{ pagina }}">{{pagina}}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </nav>
+    {% else %} 
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Seja bem vindo a sua agenda!</h1>
+            <p class="lead">Um simples aplicativo para gerenciar seus compromissos.</p>
+            <hr class="my-4">
+            <p>Clique abaixo para se registrar</p>
+            <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'cadastro' %}" role="button">Registrar</a>
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Head</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque explicabo qui dicta totam aut ab molestias quisquam repudiandae modi voluptatem, natus quod. Est, cupiditate rerum fuga soluta at pariatur a.</p>
+                <p>
+                    <a class="btn btn-secondary"  href="#">Ver detalhes</a>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h2>Head</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque explicabo qui dicta totam aut ab molestias quisquam repudiandae modi voluptatem, natus quod. Est, cupiditate rerum fuga soluta at pariatur a.</p>
+                <p>
+                    <a class="btn btn-secondary"  href="#">Ver detalhes</a>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h2>Head</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque explicabo qui dicta totam aut ab molestias quisquam repudiandae modi voluptatem, natus quod. Est, cupiditate rerum fuga soluta at pariatur a.</p>
+                <p>
+                    <a class="btn btn-secondary"  href="#">Ver detalhes</a>
+                </p>
+            </div>
+        </div>
+    </div>   
+    <hr> 
+    <footer class="container">
+        <p>
+            © Company 2017-2018
+        </p>
+    </footer>
+    {% endif %}
 {%endblock%}
