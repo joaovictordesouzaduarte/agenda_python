@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-zy07is21z%%pfem_4p8)ex_*mzw0x+l=l3=)^3&f!fmibbn_hx
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '0.0.0.0'
+    '0.0.0.0',
     'agendapy.herokuapp.com',
     '127.0.0.1'
 ]
